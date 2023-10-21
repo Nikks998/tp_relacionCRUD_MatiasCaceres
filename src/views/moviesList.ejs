@@ -18,8 +18,8 @@
     <h1>LISTADO DE PELÍCULAS</h1>
     <br>
     <div class="d-flex gap-2">
-        <a class="btn btn-success" href="/movies/add">Agregar una Pelicula</a>
-        <a class="btn btn-primary" href="/">Inicio</a>
+        <a class="btn btn-success fw-semibold" href="/movies/add">Agregar una Pelicula</a>
+        <a class="btn btn-primary fw-semibold" href="/">Inicio</a>
     </div>
     <br>
     <!-- /////////////////////////////////// -->
@@ -28,15 +28,15 @@
 
             <thead>
                 <tr>
-                    <th class="" scope="col">#</th>
+                    <th class="text-uppercase fw-bold" scope="col">#</th>
 
-                    <th class="" scope="col">Titulo</th>
+                    <th class="text-uppercase fw-bold" scope="col">Titulo</th>
 
-                    <th class="" scope="col">Rating</th>
+                    <th class="text-uppercase fw-bold text-center" scope="col">Rating</th>
 
-                    <th class="" scope="col">Premios</th>
+                    <th class="text-uppercase fw-bold text-center" scope="col">Premios</th>
 
-                    <th class="" scope="col">Acciones</th>
+                    <th class="text-uppercase fw-bold text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody class="">
@@ -50,16 +50,16 @@
                             <%= title %>
                         </td>
 
-                        <td class="">
+                        <td class="text-center">
                             <%= rating %>
                         </td>
 
-                        <td class="">
+                        <td class="text-center">
                             <%= awards %>
                         </td>
 
                         <td>
-                            <div class="d-flex gap-2">
+                            <div class="d-flex gap-2 justify-content-center">
 
                                 <a href="/movies/detail/<%= id %>" class="btn btn-sm btn-outline-primary">
                                     <i class="fas fa-eye"></i>
