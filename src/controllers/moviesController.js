@@ -51,7 +51,7 @@ const moviesController = {
         })
             .then((genres) => {
                 return res.render("moviesAdd", {
-                    genres,
+                    genres
                 });
             })
             .catch((error) => console.log(error));

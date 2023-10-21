@@ -14,35 +14,42 @@
     <figure>
         <img src="/img/logo-DH.png" alt="Logo Digital House">
     </figure>
-    <h1 class="titulo">Agregar Película</h1>
-    <br>
-    <section class="formulario">
-        <form action="/movies/create" method="POST">
-            <label for="title">Title </label>
-            <p><input type="text" name="title" id="" class="form-control" required></p>
-            <label for="rating">Rating </label>
-            <p><input type="number" name="rating" id="" class="form-control" required> </p>
-            <label for="awards">Awards </label>
-            <p><input type="number" name="awards" id="" class="form-control" required></p>
-            <label for="release_date">Release date </label>
-            <p><input type="date" name="release_date" id="" class="form-control" required></p>
-            <label for="length">Length </label>
-            <p><input type="number" name="length" id="" class="form-control" required></p>
-            <label for="genreID">Genre </label>
-            <p>
-                <select name="genre_id" id="" class="form-select" required>
-                    <option value="" disabled selected>- select genre - </option>
-                    <% genres.forEach(genre => { %>
-                    <option value="<%= genre.id %>"><%= genre.name %></option>
-                    <% }); %>
-                </select>
-            </p>
-            <br>
-            <div class="d-flex justify-content-around"> 
-            <button class="btn btn-success" type="submit">Agregar</button>
-            <a  class="btn btn-dark" href="/movies">Listado de Películas</a>
+    <section class="d-flex justify-content-center row">
+        <div class="card col-12 col-md-8 col-xl-4">
+            <div class="card-header">
+                <h1 class="titulo">Agregar Película</h1>
             </div>
-        </form>
+            <div class="card-body">
+                <section class="formulario w-100">
+                    <form action="/movies/create" method="POST">
+                        <label for="title">Title </label>
+                        <p><input type="text" name="title" id="" class="form-control" required></p>
+                        <label for="rating">Rating </label>
+                        <p><input type="number" name="rating" id="" class="form-control" required> </p>
+                        <label for="awards">Awards </label>
+                        <p><input type="number" name="awards" id="" class="form-control" required></p>
+                        <label for="release_date">Release date </label>
+                        <p><input type="date" name="release_date" id="" class="form-control" required></p>
+                        <label for="length">Length </label>
+                        <p><input type="number" name="length" id="" class="form-control" required></p>
+                        <label for="genreID">Genre </label>
+                        <p>
+                            <select name="genre_id" id="" class="form-select" required>
+                                <option value="" disabled selected>- Seleccionar genero - </option>
+                                <% genres.forEach(genre => { %>
+                                <option value="<%= genre.id %>"><%= genre.name %></option>
+                                <% }); %>
+                            </select>
+                        </p>
+                        <br>
+                        <div class="d-flex justify-content-around">
+                        <button class="btn btn-success fw-semibold" type="submit">Agregar</button>
+                        <a  class="btn btn-dark fw-semibold" href="/movies">Volver a Películas</a>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
     </section>
     
 </body>

@@ -36,11 +36,13 @@
 
                     <th class="text-uppercase fw-bold text-center" scope="col">Premios</th>
 
+                    <th class="text-uppercase fw-bold text-center" scope="col">Genero</th>
+
                     <th class="text-uppercase fw-bold text-center" scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody class="">
-                <% movies.forEach(({id, title, rating, awards, genre_id },index)=> { %>
+                <% movies.forEach(({id, title, rating, awards, genre },index)=> { %>
                     <tr>
                         <th class="" scope="row">
                             <%= index + 1 %>
@@ -56,6 +58,10 @@
 
                         <td class="text-center">
                             <%= awards %>
+                        </td>
+                        
+                        <td class="text-center">
+                            <%= genre?.name %>
                         </td>
 
                         <td>
