@@ -16,13 +16,13 @@
         <img src="/img/logo-DH.png" alt="Logo Digital House">
     </figure>
     <section class="d-flex justify-content-center row">
-        <div class="card col-12 col-md-8 col-xl-4">
+        <div class="card col-12 col-md-8">
             <div class="card-header">
                 <h1 class="titulo">Película a Editar:  <span class="text-success"><%= Movie.title %></span></h1>
             </div>
             <div class="card-body">
                 <section class="formulario w-100">
-                    <form action="/movies/update/<%= Movie.id %>" method="POST">
+                    <form action="/movies/update/<%= Movie.id %>?_method=PUT" method="POST">
                         <label for="title">Title </label>
                         <p><input class="form-control" type="text" name="title" id="" value="<%= Movie.title %>" required></p>
                         <label for="rating">Rating </label>
@@ -37,10 +37,7 @@
                         <p>
                             <select name="genre_id" id="" class="form-select" required>
                                 <% allGenres.forEach(genre => { %>
-                                <option value="<%= genre.id %>"
-                                    <% if (Movie.genre_id == genre.id) { %>
-                                        <%= 'selected' %>
-                                        <% }; %>>
+                                <option value="<%= genre.id %>" <%= Movie.genre_id == genre.id && 'selected'%>>
                                         <%= genre.name %>
                                 </option>
                                 <% }); %>
@@ -50,7 +47,23 @@
                         <label for="genre_id">Genre ID </label>
                         <p><input type="number" name="genre_id" id="" value="<%= Movie.genre_id %>"></p>
                     -->
-        
+                    
+                        <div class="mb-3 col-12">
+                            <h5 class="form-label">Actores</h5>
+                            <hr>
+                            <div class="row">
+                                <% actors.forEach(actor => { %>
+                                    <div class="col-12 col-md-3 col-lg-2">
+                                        <div class="form-check">
+                                            <input name="actors" class="form-check-input" type="checkbox" <%= Movie.actors.map(actor => actor.id).includes(actor.id) && 'checked' %> value="<%= actor.id %>" id="actor <%= actor.id %>">
+                                            <label class="form-check-label" for="actor <%= actor.id %>">
+                                                <%= actor.first_name %> <%= actor.last_name %>
+                                            </label>
+                                        </div>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        </div>
                         <br>
                     <div class="d-flex justify-content-around">
                         <button class="btn btn-success fw-semibold" type="submit">Actualizar</button>

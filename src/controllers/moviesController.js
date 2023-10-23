@@ -75,19 +75,51 @@ const moviesController = {
         const genres = db.Genre.findAll({
             order: ["name"],
         })
-        const movie = db.Movie.findByPk(req.params.id)
+        const movie = db.Movie.findByPk(req.params.id, {
+            include: ['actors']
+        })
 
-        Promise.all([genres, movie])
-            .then(([genres, movie]) => {
+        const actors = db.Actor.findAll({
+            order: [['first_name', 'ASC'], ['last_name', 'ASC']]
+        })
+
+        Promise.all([genres, movie, actors])
+            .then(([genres, movie, actors]) => {
                 return res.render("moviesEdit", {
                     allGenres: genres,
                     Movie: movie,
+                    actors,
                     moment
                 });
             })
             .catch((error) => console.log(error));
     },
-    update: (req, res) => { },
+    update: (req, res) => {
+
+        const {title, awards, rating, length, release_date, genre_id, actors} =  req.body
+
+        db.Movie.findByPk({
+            include: ['actors']
+        })
+        .then(movie => {
+            db.Movie.update({
+                title: title.trim(),
+                awards,
+                rating,
+                length,
+                release_date,
+                genre_id,
+            },{
+                where: {
+                    id:req.params.id
+                }
+            })
+            .then(() => {
+                db.Movie
+            })
+        })
+        
+    },
     delete: (req, res) => { },
     destroy: (req, res) => { },
 };

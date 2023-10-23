@@ -13,7 +13,7 @@ router
     .get('/movies/add', add)
     .post('/movies/create', create)
     .get('/movies/edit/:id', edit)
-    .post('/movies/update/:id', update)
+    .put('/movies/update/:id', update)
     .get('/movies/delete/:id', remove)
-    .post('/movies/delete/:id', destroy)
+    .delete('/movies/delete/:id', destroy)
 module.exports = router;
