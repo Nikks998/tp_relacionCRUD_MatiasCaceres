@@ -11,6 +11,7 @@ body {
 a {
   color: #00B7FF;
   text-decoration: none;
+  transition: all .3s ease;
 }
 img{
   width: 100%;
@@ -42,4 +43,8 @@ figure{
 .formulario{
   margin: auto;
   width: 20%;
+}
+
+.hover-icon:hover {
+  transform: scale(1.05);
 }
