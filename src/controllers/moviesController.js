@@ -1,8 +1,10 @@
+const axios = require('axios').default
 const path = require("path");
 const db = require("../database/models");
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
-const moment = require('moment')
+const moment = require('moment');
+const { response } = require('express');
 
 //Aqui tienen una forma de llamar a cada uno de los modelos
 // const {Movies,Genres,Actor} = require('../database/models');
@@ -11,6 +13,8 @@ const moment = require('moment')
 const Movies = db.Movie;
 const Genres = db.Genre;
 const Actors = db.Actor;
+
+const URL_BASE = 'http://www.omdbapi.com/?apikey=1a4e2d32';
 
 const moviesController = {
     list: (req, res) => {
@@ -96,12 +100,10 @@ const moviesController = {
     },
     update: (req, res) => {
 
-        const {title, awards, rating, length, release_date, genre_id, actors} =  req.body
+        let {title, awards, rating, length, release_date, genre_id, actors} =  req.body;
 
-        db.Movie.findByPk({
-            include: ['actors']
-        })
-        .then(movie => {
+        actors = typeof actors === 'string' ? [actors] : actors;
+
             db.Movie.update({
                 title: title.trim(),
                 awards,
@@ -115,13 +117,70 @@ const moviesController = {
                 }
             })
             .then(() => {
-                db.Movie
+                db.Actor_Movie.destroy({
+                    where: {
+                        movie_id: req.params.id
+                    }
+                })
+                .then(() => {
+                    if(actors){
+                    const actorsDB = actors.map(actor => {
+                        return {
+                            movie_id: req.params.id,
+                            actor_id: actor
+                        }
+                    })
+                    db.Actor_Movie.bulkCreate(actorsDB, {
+                        validate: true
+                    }).then(() => console.log('Actores agregados correctamente'))
+                }
+                })
             })
-        })
+            .catch(error => console.log(error))
+            .finally(() => res.redirect('/movies'))
         
     },
     delete: (req, res) => { },
     destroy: (req, res) => { },
+    // search: (req,res) =>{
+    //     const keyword = req.query.keyword
+
+    //     db.Movie.findAll({
+    //         where: {
+    //             title: {
+    //                 [Op.substring]: keyword
+    //             }
+    //         }
+    //     })
+    //     .then(movies => {
+    //         if(!movies.length){
+    //             axios.get(URL_BASE, `&t=${keyword}`)
+    //             .then(response => {
+    //                 console.log(response.data)
+    //                 const {Title, Released, Genre, Awards, Poster, Ratings} = response.data
+    //                 const awardsArray = Awards.match(/\d+/g)
+
+    //                 const awardsParseado = awardsArray.map(award => +award)
+
+    //                 const awards = awardsParseado.reduce((acum, num) => acum + +num, 0)
+
+    //                 console.log(awards, '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
+                    
+    //                 return res.send(awardsArray)
+    //                 /* let peliculaRobada = {
+    //                     title : Title,
+    //                     awards,
+    //                     rating,
+    //                     release_date,
+    //                     image,
+    //                     genre_id
+    //                 } */
+    //             })
+    //         }
+    //         //return res.render('moviesList', {movies, result: true})
+    //     })
+    //     .catch(error => console.log(error))
+    // }
 };
 
 module.exports = moviesController;

@@ -17,9 +17,17 @@
     </figure>
     <h1>LISTADO DE PELÍCULAS</h1>
     <br>
-    <div class="d-flex gap-2">
+    <div class="d-flex justify-content-between align-items-center">
         <a class="btn btn-success fw-semibold" href="/movies/add"><i class="fa-solid fa-plus fa-sm"></i>  Agregar pelicula</a>
-        <a class="btn btn-primary fw-semibold" href="/"><i class="fa-solid fa-house fa-sm"></i>  Inicio</a>
+        <a class="btn btn-primary fw-semibold text-center" href="/"><i class="fa-solid fa-house fa-sm"></i>  Inicio</a>
+        <form action="/movies/search" method="GET">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="keyword" placeholder="Buscar pelicula...">
+                <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-magnifying-glass"></i></span>
+            </div>
+            <!-- <input type="text" class="form-control" name="keyword">
+            <button type="submit"><i class="fa fa-search"></i></button> -->
+        </form>
     </div>
     <br>
     <!-- /////////////////////////////////// -->
