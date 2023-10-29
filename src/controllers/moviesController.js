@@ -140,8 +140,18 @@ const moviesController = {
             .finally(() => res.redirect('/movies'))
         
     },
-    delete: (req, res) => { },
-    destroy: (req, res) => { },
+    delete: (req, res) => {},
+    destroy: (req, res) => {
+        db.Movie.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then( () => {
+            return res.send('eliminar')
+        })
+        .catch(error => console.log(error))
+    },
     // search: (req,res) =>{
     //     const keyword = req.query.keyword
 
