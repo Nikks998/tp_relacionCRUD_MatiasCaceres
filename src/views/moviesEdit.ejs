@@ -22,7 +22,7 @@
             </div>
             <div class="card-body">
                 <section class="formulario w-100">
-                    <form action="/movies/update/<%= Movie.id %>?_method=PUT" method="POST">
+                    <form action="/movies/update/<%= Movie.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
                         <label for="title">Title </label>
                         <p><input class="form-control" type="text" name="title" id="" value="<%= Movie.title %>" required></p>
                         <label for="rating">Rating </label>

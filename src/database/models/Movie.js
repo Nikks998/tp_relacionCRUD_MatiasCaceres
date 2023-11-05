@@ -27,6 +27,7 @@ module.exports = (sequelize, dataTypes) => {
         },
         length: dataTypes.BIGINT(10),
         genre_id: dataTypes.BIGINT(10),
+        image: dataTypes.STRING
     };
     let config = {
         timestamps: true,

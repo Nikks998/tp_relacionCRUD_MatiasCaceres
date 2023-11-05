@@ -68,7 +68,8 @@ const moviesController = {
             awards,
             release_date,
             length,
-            genre_id
+            genre_id,
+            image: req.file ? req.file.filename : null
         })
             .then(movie => {
                 return res.redirect('/movies')
@@ -142,14 +143,34 @@ const moviesController = {
     },
     delete: (req, res) => {},
     destroy: (req, res) => {
-        db.Movie.destroy({
+        const id = req.params.id
+
+        db.Actor_Movie.destroy({
             where: {
-                id: req.params.id
+                movie_id: id
             }
         })
-        .then( () => {
-            return res.send('eliminar')
-        })
+        .then(() => {
+            db.Actor.update(
+                {
+                    favorite_movie_id : null
+                },
+                {
+                where: {
+                    favorite_movie_id : id
+                }
+            })
+            .then(() => {
+                db.Movie.destroy({
+                    where: {
+                        id: id
+                    }
+                })
+                .then( () => {
+                    return res.redirect('/movies')
+                })
+            })
+        })        
         .catch(error => console.log(error))
     },
     // search: (req,res) =>{
