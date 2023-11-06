@@ -26,6 +26,14 @@
                     <li class="list-group-item"><b>Duracion: <%= length + ' min'%></b></li>
                     <li class="list-group-item"><b>Estreno: <%= moment(release_date).format('DD-MM-YYYY') %></b></li>
                 </ul>
+                <br>
+                <h5>Actores</h5>
+                <hr>
+                <ul class="list-group list-group-flush">
+                    <% actors.forEach(actor => { %>
+                        <li class="list-group-item"><%= actor.first_name %> <b><%= actor.last_name %></b></li>
+                    <% }) %>
+                </ul>
             </div>
     </div>
 </body>

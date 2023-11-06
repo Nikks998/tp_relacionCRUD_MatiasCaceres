@@ -33,6 +33,10 @@
                         <p><input class="form-control" type="date" name="release_date" id="" value="<%= moment(Movie.release_date).format('YYYY-MM-DD') %>"></p>
                         <label for="length">Length </label>
                         <p><input class="form-control" type="number" name="length" id="" value="<%= Movie.length %>" required></p>
+                        <div class="mb-3 col-12">
+                            <label for="formFile" class="form-label">Cargar Imagen</label>
+                            <input type="file" name="image" id="formFile" class="form-control">
+                        </div>
                         <label for="genre_id">Genre </label>
                         <p>
                             <select name="genre_id" id="" class="form-select" required>

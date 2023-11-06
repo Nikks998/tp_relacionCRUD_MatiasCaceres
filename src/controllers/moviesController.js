@@ -26,7 +26,10 @@ const moviesController = {
             });
     },
     detail: (req, res) => {
-        db.Movie.findByPk(req.params.id).then((movie) => {
+        db.Movie.findByPk(req.params.id, {
+            include: ['actors']
+        })
+        .then((movie) => {
             return res.render("moviesDetail.ejs", { ...movie.dataValues, moment });
         });
     },
@@ -112,6 +115,7 @@ const moviesController = {
                 length,
                 release_date,
                 genre_id,
+                image: req.file ? req.file.filename : req.body.image
             },{
                 where: {
                     id:req.params.id
